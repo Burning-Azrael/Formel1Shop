@@ -14,9 +14,9 @@ public class F1TicketGUI extends JFrame {
     JTextField txt_name, txt_email, txt_phone;
     JComboBox<String> cbo_race;
     JComboBox<Integer> cbo_quantity;
-    JRadioButton opt_paypal, opt_cash;
+    JRadioButton opt_paypal, opt_cash, opt_stehplatz,opt_tribuene,opt_vip;
     ButtonGroup paymentGroup;
-    JCheckBox chk_stehplatz, chk_tribuene, chk_vip;
+    //JCheckBox chk_stehplatz, chk_tribuene, chk_vip;
     JButton btn_reset, btn_save, btn_exit, btn_speichern;
 
     Map<String, Map<String, BigDecimal>> preise;
@@ -123,13 +123,25 @@ public class F1TicketGUI extends JFrame {
         c.gridy = 5;
         this.add(lbl_seat, c);
 
+        opt_stehplatz = new JRadioButton("Stehplatz");
+        opt_tribuene = new JRadioButton("Tribüne");
+        opt_vip = new JRadioButton("VIP");
+ 
+        
+        
+
+        ButtonGroup sitzgruppe = new ButtonGroup();
+        sitzgruppe.add(opt_stehplatz);
+        sitzgruppe.add(opt_tribuene);
+        sitzgruppe.add(opt_vip);
+
+        
+ 
         JPanel sitzPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        chk_stehplatz = new JCheckBox("Stehplatz");
-        chk_tribuene = new JCheckBox("Tribüne");
-        chk_vip = new JCheckBox("VIP");
-        sitzPanel.add(chk_stehplatz);
-        sitzPanel.add(chk_tribuene);
-        sitzPanel.add(chk_vip);
+        sitzPanel.add(opt_stehplatz);
+        sitzPanel.add(opt_tribuene);
+        sitzPanel.add(opt_vip);
+ 
         c.gridx = 1;
         this.add(sitzPanel, c);
 
@@ -150,6 +162,7 @@ public class F1TicketGUI extends JFrame {
         c.gridx = 0; 
         c.gridy = 7;
         this.add(lbl_payment, c);
+
         opt_paypal = new JRadioButton("PayPal");
         opt_cash = new JRadioButton("Bar");
         opt_cash.setSelected(true);
@@ -199,9 +212,9 @@ public class F1TicketGUI extends JFrame {
         txt_email.setText("");
         txt_phone.setText("");
         cbo_race.setSelectedIndex(0);
-        chk_stehplatz.setSelected(false);
-        chk_tribuene.setSelected(false);
-        chk_vip.setSelected(false);
+        opt_stehplatz.setSelected(false);
+        opt_tribuene.setSelected(false);
+        opt_vip.setSelected(false);
         cbo_quantity.setSelectedIndex(0);
         opt_cash.setSelected(true);
     }
@@ -212,9 +225,9 @@ public class F1TicketGUI extends JFrame {
         String telefon = txt_phone.getText();
         String strecke = (String) cbo_race.getSelectedItem();
         int anzahl = (Integer) cbo_quantity.getSelectedItem();
-        String sitzplatz = chk_vip.isSelected() ? "VIP" :
-                           chk_tribuene.isSelected() ? "Tribüne" :
-                           chk_stehplatz.isSelected() ? "Stehplatz" : "Keine Auswahl";
+        String sitzplatz = opt_vip.isSelected() ? "VIP" :
+                           opt_tribuene.isSelected() ? "Tribüne" :
+                           opt_stehplatz.isSelected() ? "Stehplatz" : "Keine Auswahl";
 
         if (sitzplatz.equals("Keine Auswahl")) {
             JOptionPane.showMessageDialog(this, "Bitte wählen Sie eine Sitzplatzoption.");
