@@ -24,9 +24,12 @@ public class F1TicketGUI extends JFrame {
     public F1TicketGUI() {
         this.setTitle("Formel 1 Ticketformular");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
         initPrices();
         initComponents();
+
         this.pack();
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
