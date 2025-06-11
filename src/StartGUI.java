@@ -33,7 +33,7 @@ public class StartGUI extends JFrame{
         this.add(btn_neu,c);
         btn_neu.addActionListener(mylistener);
 
-        this.btn_anzeigen = new JButton("Zum Bestellformular");
+        this.btn_anzeigen = new JButton("Bestellformulare anzeigen");
         c.gridx = 1;
         c.gridy = 0;
         this.add(btn_anzeigen,c);
@@ -50,7 +50,7 @@ public class StartGUI extends JFrame{
         
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == btn_neu) {
-                    //new F1TicketFormular();
+                    new F1TicketGUI();
 
                 }else if (e.getSource() == btn_anzeigen) {
                     
