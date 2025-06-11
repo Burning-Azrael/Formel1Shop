@@ -233,7 +233,5 @@ public class F1TicketGUI extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new F1TicketGUI());
-    }
+ 
 }
