@@ -50,6 +50,7 @@ public class StartGUI extends JFrame{
         
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == btn_neu) {
+                    dispose();
                     new F1TicketGUI();
 
                 }else if (e.getSource() == btn_anzeigen) {

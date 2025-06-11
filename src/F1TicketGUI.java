@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -208,6 +209,7 @@ public class F1TicketGUI extends JFrame {
         btn_exit.addActionListener(e -> dispose());
         btn_save.addActionListener(this::saveToFile);
         
+        
     }
 
     private void resetForm() {
@@ -248,6 +250,32 @@ public class F1TicketGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Fehler beim Speichern!");
         }
     }
+    private class MyActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            if (e.getSource() == btn_speichern) {
+                String name = txt_name.getText();
+                String email = txt_email.getText();
+                String tel = txt_phone.getText();
+                String race = cbo_race.getSelectedItem().toString();
 
+                if (opt_stehplatz.isSelected()) {
+                    String opt = opt_stehplatz.getText();
+                }else if (opt_tribuene.isSelected()){
+                    String opt = opt_tribuene.getText();
+                }else if (opt_vip.isSelected()){
+                    String opt = opt_vip.getText();
+                }
+
+                Integer anzahl = Integer.parseInt(cbo_quantity.getSelectedItem().toString());
+
+                if (opt_paypal.isSelected()) {
+                    String zArt = opt_paypal.getText();
+                }else if(opt_cash.isSelected()){
+                    String zArt = opt_cash.getText();
+                }
+            
+            }
+        }
  
+    }
 }
