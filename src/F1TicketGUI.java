@@ -276,7 +276,7 @@ public class F1TicketGUI extends JFrame {
                 BestellungDAO bestellung = new BestellungDAO();
 
                 //es fehlen die IDs von kunden und veranstaltung
-                bestellung.speichernBestellung(ticket);
+                //bestellung.speichernBestellung(ticket);
             
             }else if (e.getSource() == btn_reset) {
                 txt_name.setText("");
