@@ -128,6 +128,7 @@ public class F1TicketGUI extends JFrame {
         this.add(lbl_seat, c);
 
         opt_stehplatz = new JRadioButton("Stehplatz");
+        opt_stehplatz.setSelected(true);
         opt_tribuene = new JRadioButton("Tribüne");
         opt_vip = new JRadioButton("VIP");
  
@@ -170,6 +171,7 @@ public class F1TicketGUI extends JFrame {
         opt_paypal = new JRadioButton("PayPal");
         opt_cash = new JRadioButton("Bar");
         opt_cash.setSelected(true);
+
         paymentGroup = new ButtonGroup();
         paymentGroup.add(opt_paypal);
         paymentGroup.add(opt_cash);
@@ -180,6 +182,8 @@ public class F1TicketGUI extends JFrame {
         this.add(zahlungPanel, c);
 
         // Buttons
+        ActionListener myActionListener = new MyActionListener();
+
         btn_reset = new JButton("Zurücksetzen");
         c.gridx = 0;
         c.gridy = 8;
@@ -205,24 +209,15 @@ public class F1TicketGUI extends JFrame {
         this.add(btn_speichern,c);
         
         // Events
-        btn_reset.addActionListener(e -> resetForm());
+        btn_reset.addActionListener(myActionListener);
         btn_exit.addActionListener(e -> dispose());
         btn_save.addActionListener(this::saveToFile);
+        btn_speichern.addActionListener(myActionListener);
         
         
     }
 
-    private void resetForm() {
-        txt_name.setText("");
-        txt_email.setText("");
-        txt_phone.setText("");
-        cbo_race.setSelectedIndex(0);
-        opt_stehplatz.setSelected(false);
-        opt_tribuene.setSelected(false);
-        opt_vip.setSelected(false);
-        cbo_quantity.setSelectedIndex(0);
-        opt_cash.setSelected(true);
-    }
+    
 
     private void saveToFile(ActionEvent e) {
         String name = txt_name.getText();
@@ -257,23 +252,47 @@ public class F1TicketGUI extends JFrame {
                 String email = txt_email.getText();
                 String tel = txt_phone.getText();
                 String race = cbo_race.getSelectedItem().toString();
+                String opt = "";
+                String zArt = "";
 
                 if (opt_stehplatz.isSelected()) {
-                    String opt = opt_stehplatz.getText();
+                    opt = opt_stehplatz.getText();
                 }else if (opt_tribuene.isSelected()){
-                    String opt = opt_tribuene.getText();
+                    opt = opt_tribuene.getText();
                 }else if (opt_vip.isSelected()){
-                    String opt = opt_vip.getText();
+                    opt = opt_vip.getText();
                 }
 
                 Integer anzahl = Integer.parseInt(cbo_quantity.getSelectedItem().toString());
 
                 if (opt_paypal.isSelected()) {
-                    String zArt = opt_paypal.getText();
+                    zArt = opt_paypal.getText();
                 }else if(opt_cash.isSelected()){
-                    String zArt = opt_cash.getText();
+                    zArt = opt_cash.getText();
                 }
+
+                Ticket ticket = new Ticket(name, email, tel, race, opt, anzahl, zArt);
+
+                BestellungDAO bestellung = new BestellungDAO();
+
+                //es fehlen die IDs von kunden und veranstaltung
+                bestellung.speichernBestellung(ticket);
             
+            }else if (e.getSource() == btn_reset) {
+                txt_name.setText("");
+                txt_email.setText("");
+                txt_phone.setText("");
+
+                cbo_race.setSelectedIndex(0);
+
+                opt_stehplatz.setSelected(true);
+                opt_tribuene.setSelected(false);
+                opt_vip.setSelected(false);
+
+                cbo_quantity.setSelectedIndex(0);
+
+                opt_cash.setSelected(true);
+                opt_paypal.setSelected(false);
             }
         }
  
